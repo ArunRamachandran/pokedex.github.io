@@ -3,7 +3,7 @@
 import Request from './RequestWebUtils';
 import * as PokedexActionCreator from '../actions/PokedexActions';
 
-const poke_api = 'http://pokeapi.co/api/v2/pokemon';
+const poke_api = 'http://pokeapi.co/api/v2/pokemon/';
 
 export function fetchPokemonData () {
 	let limit = 811;
