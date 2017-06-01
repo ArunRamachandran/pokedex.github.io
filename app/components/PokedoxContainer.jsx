@@ -19,7 +19,9 @@ export default class PokedoxContainer extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-        	data: []
+        	data: [],
+        	currentPage: 1,
+        	cardsPerPage: 10
         }
     }
 
@@ -48,10 +50,17 @@ export default class PokedoxContainer extends Component {
  
 	render () {
 
+		const {data, currentPage, cardsPerPage} = this.state;
+
+		// Logic for current page contents
+		const indexOfLastCard = currentPage * cardsPerPage;
+		const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+		const currentData = data.slice(indexOfFirstCard, indexOfLastCard);
+
 		return (
 			<div id="pokedox-container">
 				{/*<CustomSearchPanel/>*/}
-				{ this.state.data.length ? <PokemonCards data={this.state.data}/> : <Loader/> }
+				{ this.state.data.length ? <PokemonCards data={currentData}/> : <Loader/> }
 				{/*<Pagination/>*/}
 			</div>
 		);
