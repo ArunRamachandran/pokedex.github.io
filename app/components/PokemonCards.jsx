@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
-import { Button, Card, CardText, FABButton, Icon, CardTitle, CardActions } from 'react-mdl';
+import { Button, Card, CardText, Icon, CardTitle, CardActions } from 'react-mdl';
 import '../stylesheets/pokedex-cards.scss';
 
 const cardStyle = {
@@ -20,6 +20,10 @@ export default class PokemonCards extends Component {
 
 	constructor (props) {
 		super (props);
+	}
+
+	handleCloseDialog = () => {
+		this.setState({openDialogue: false});
 	}
 
 	/** @param: string 
@@ -47,7 +51,7 @@ export default class PokemonCards extends Component {
 					        
 					    </CardText>
 					    <CardActions border>
-					        <Button colored>View Updates</Button>
+					        <Button colored>View Details</Button>
 					    </CardActions>
 					</Card>
 				</div>
