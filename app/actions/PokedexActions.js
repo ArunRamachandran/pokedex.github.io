@@ -22,3 +22,15 @@ export function dataLoaded (data) {
 		data: data
 	});
 }
+
+// Function to invoke API call to fetch pokemon attributes
+export function fetchPokemonAttributes (id) {
+	PokedexAPI.fetchPokemonAttributes(id);
+}
+
+export function attributesLoaded (attributes) {
+	AppDispatcher.dispatch({
+		type: API_CONSTANT.LOAD_ATTRIBUTES,
+		data: attributes
+	});
+}

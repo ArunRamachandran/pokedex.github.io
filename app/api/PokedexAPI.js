@@ -13,3 +13,11 @@ export function fetchPokemonData () {
 			PokedexActionCreator.dataLoaded(body.results);
 		});
 }
+
+export function fetchPokemonAttributes (id) {
+	let url = `${poke_api}${id}`;
+	return Request.get(url)
+		.then((body, res) => {
+			PokedexActionCreator.attributesLoaded(body);
+		});
+}

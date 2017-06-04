@@ -3,12 +3,12 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
-import { Button, Card, CardText, Icon, CardTitle, CardActions } from 'react-mdl';
+import CustomCard from './CustomCard.jsx';
 import '../stylesheets/pokedex-cards.scss';
 
 const cardStyle = {
 	width: '220px',
-	height: '220px',
+	height: '260px',
 	margin: 'auto'
 }
 
@@ -37,23 +37,16 @@ export default class PokemonCards extends Component {
 		return id;
 	}
 
+
+
 	createCards = (data) => {
 		let cards = data.map((pokemon, index) => {
 
 			let pokemonId = this.getId(pokemon.url);
-			//const url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"; 				
 
 			return (
-				<div className="pokemon-card" key={index}>
-					<Card shadow={0} style={cardStyle}>
-					    <CardTitle expand style={{color: '#fff', background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'bottom right 15% no-repeat #46B6AC'}}>{pokemon.name}</CardTitle>
-					    <CardText>
-					        
-					    </CardText>
-					    <CardActions border>
-					        <Button colored>View Details</Button>
-					    </CardActions>
-					</Card>
+				<div className="pokemon-cards" key={index}>
+					<CustomCard pokemon={pokemon} pokemonId={pokemonId} showAttributes={this.props.showAttributes}/>
 				</div>
 			);
 		});
