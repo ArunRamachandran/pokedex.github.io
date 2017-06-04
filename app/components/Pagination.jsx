@@ -15,17 +15,21 @@ export default class Pagination extends Component {
 	render () {
 		return (
 			<div className="pokedex-pagination">
-				<span>
+				<span style={{marginRight: '5px'}}>
 					<Tooltip label="Move Back" position="left">
-					    <Icon name="navigate_before" onClick={this.props.loadPreviousPage}/>
+					    <Chip onClick={this.props.loadPreviousPage}>
+					    	<Icon name="navigate_before" />
+						</Chip>
 					</Tooltip>
 				</span>
-				<span>
-					<Chip>Current Page : {this.props.pageNumber}</Chip>
+				<span style={{marginLeft: '2px', marginRight: '2px'}}>
+					<Chip>{this.props.pageNumber}</Chip>
 				</span>
-				<span>
+				<span style={{marginLeft: '5px'}}>
 					<Tooltip label="Next Page" position="right">
-					    <Icon name="navigate_next" onClick={this.props.loadNextPage}/>
+						<Chip onClick={this.props.loadNextPage}>
+						    	<Icon name="navigate_next" />
+						</Chip>
 					</Tooltip>
 				</span>
 			</div>

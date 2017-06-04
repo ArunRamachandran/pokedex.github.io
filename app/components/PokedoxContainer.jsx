@@ -152,16 +152,6 @@ export default class PokedoxContainer extends Component {
 							loadNextPage={this.loadNextPage}/> 
 						: <noscript/> 
 					}
-					
-					{ this.state.isSnackbarActive &&
-						<Snackbar
-				          active={this.state.isSnackbarActive}
-				          onClick={this.closeSnackbar}
-				          onTimeout={this.closeSnackbar}
-				          action="Close">
-				          	{this.state.warningMsg}
-				         </Snackbar>
-					}
 
 				</div>
 				{ this.state.openDialogue && 
@@ -169,6 +159,15 @@ export default class PokedoxContainer extends Component {
 						selectedIndex={this.state.selectedIndex} 
 						openDialogue={this.state.openDialogue}
 						handleCloseDialog={this.handleCloseDialog}/> 
+				}
+				{ this.state.isSnackbarActive &&
+					<Snackbar
+			          active={this.state.isSnackbarActive}
+			          onClick={this.closeSnackbar}
+			          onTimeout={this.closeSnackbar}
+			          action="Close">
+			          	{this.state.warningMsg}
+			         </Snackbar>
 				}
 			</div>
 		);
