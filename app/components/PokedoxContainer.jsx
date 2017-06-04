@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {fetchPokemonData, fetchPokemonAttributes} from '../actions/PokedexActions';
+import {fetchPokemonData} from '../actions/PokedexActions';
 import PokedexStore from '../store/PokedexStore';
 import AppConstants from '../constant/Constants';
 import Header from './Header.jsx';
@@ -35,8 +35,7 @@ export default class PokedoxContainer extends Component {
         	isFilter: false,
         	filterIndex: null,
         	openDialogue: false,
-        	selectedIndex: null,
-        	pokemonAttributes: null
+        	selectedIndex: null
         }
     }
 
@@ -47,12 +46,10 @@ export default class PokedoxContainer extends Component {
 
     componentDidMount () {
     	PokedexStore.addChangeListner(EVENT_CONSTANT.DATA_LOADED, this.renderData);
-    	PokedexStore.addChangeListner(EVENT_CONSTANT.ATTRIBUTES_LOADED, this.updatePokemonAttributes);
     }
 
     componentWillUnMount () {
     	PokedexStore.removeChangeListner(EVENT_CONSTANT.DATA_LOADED, this.renderData);
-    	PokedexStore.removeChangeListner(EVENT_CONSTANT.ATTRIBUTES_LOADED, this.updatePokemonAttributes);
     }
 
     /** @param: An array of objects 
@@ -62,11 +59,6 @@ export default class PokedoxContainer extends Component {
       */
     renderData = (data) => {
     	this.setState({ data:  data});
-    }
-
-    updatePokemonAttributes = (data) => {
-    	console.log("Attributes : ", data);
-    	this.setState({pokemonAttributes: data});
     }
 
     /** description: Function to load previous page according to the users choice **/
@@ -125,13 +117,11 @@ export default class PokedoxContainer extends Component {
     		openDialogue: true,
     		selectedIndex: id
     	})
-    	fetchPokemonAttributes(id);
     }
 
     handleCloseDialog = () => {
     	this.setState({
-    		openDialogue: false,
-    		pokemonAttributes: null
+    		openDialogue: false
     	})
     }
 
@@ -175,8 +165,8 @@ export default class PokedoxContainer extends Component {
 
 				</div>
 				{ this.state.openDialogue && 
-					<DetailedView 
-						attributes={this.state.pokemonAttributes}
+					<DetailedView
+						selectedIndex={this.state.selectedIndex} 
 						openDialogue={this.state.openDialogue}
 						handleCloseDialog={this.handleCloseDialog}/> 
 				}

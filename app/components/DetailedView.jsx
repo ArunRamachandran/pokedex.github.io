@@ -3,8 +3,17 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
+import {fetchPokemonAttributes} from '../actions/PokedexActions';
+import PokedexStore from '../store/PokedexStore';
+import AppConstants from '../constant/Constants';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Spinner } from 'react-mdl';
 import '../stylesheets/pokedex-detailed-view.scss';
+
+const {
+	ACTIONS_CONSTANT,
+	API_CONSTANT,
+	EVENT_CONSTANT
+} = AppConstants;
 
 export default class DetailedView extends Component {
 
@@ -15,7 +24,27 @@ export default class DetailedView extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			attributes: null
+		}
 	}
+
+	componentWillMount() {
+		fetchPokemonAttributes(this.props.selectedIndex);
+	}
+
+	componentDidMount() {
+		PokedexStore.addChangeListner(EVENT_CONSTANT.ATTRIBUTES_LOADED, this.updatePokemonAttributes);
+	}
+
+	componentWillUnMount() {
+		PokedexStore.removeChangeListner(EVENT_CONSTANT.ATTRIBUTES_LOADED, this.updatePokemonAttributes);
+	}
+
+	updatePokemonAttributes = (data) => {
+    	console.log("Attributes : ", data);
+    	this.setState({attributes: data});
+    }
 
 	getSpeciesAbilities = (data) => {
 		let abilities = [];
@@ -46,19 +75,16 @@ export default class DetailedView extends Component {
 
 	render () {
 
-		const { openDialog, attributes } = this.props;
-		const pokemonId = attributes.id;
-
-		const details = attributes && this.abstractDetatails(attributes);
+		const details = this.state.attributes && this.abstractDetatails(this.state.attributes);
 
 		return (
-			<Dialog open={openDialog} style={{display: 'block', zIndex: '10', top: '90px'}}>
-	          { attributes ? 
+			<Dialog open={this.props.openDialog} style={{display: 'block', zIndex: '10', top: '90px'}}>
+	          { this.state.attributes ? 
 	          	<div>
 		          <DialogTitle>
 		          	{details.name}
 		          </DialogTitle>
-		          <DialogContent className="dialog-content" style={{background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'top right 15% no-repeat'}}>
+		          <DialogContent className="dialog-content" style={{background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${this.state.attributes.id}.png` + ')' + 'top right 15% no-repeat'}}>
 		            <span>Height : {details.height}</span>
 		            <span>Weight : {details.weight}</span>
 		            <span>Type   : {details.type}</span>
