@@ -33,8 +33,6 @@ PokedexStore.dispatchToken = dispatcher.register (action => {
 
 	switch (action.type) {
 		case API_CONSTANT.LOAD_DATA:
-			console.log("Store.. Data received");
-			console.log("action.data : ", action);
 			updatePokexStore(action.data);
 			PokedexStore.emitChange(EVENT_CONSTANT.DATA_LOADED, action.data);
 			break;

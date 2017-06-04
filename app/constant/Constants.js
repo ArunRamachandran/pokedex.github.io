@@ -18,7 +18,3 @@ let AppConstants = {
 }
 
 export default AppConstants;
-
-/*export const ACTION = {
-	DATA_LOADED: "data_loaded"
-};*/
