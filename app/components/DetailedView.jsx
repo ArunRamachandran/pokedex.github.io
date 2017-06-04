@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
-import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Spinner } from 'react-mdl';
 import '../stylesheets/pokedex-detailed-view.scss';
 
 export default class DetailedView extends Component {
@@ -49,23 +49,30 @@ export default class DetailedView extends Component {
 		const { openDialog, attributes } = this.props;
 		const pokemonId = attributes.id;
 
-		const details = this.abstractDetatails(attributes);
+		const details = attributes && this.abstractDetatails(attributes);
 
 		return (
 			<Dialog open={openDialog} style={{display: 'block', zIndex: '10', top: '90px'}}>
-	          <DialogTitle>
-	          	{details.name}
-	          </DialogTitle>
-	          <DialogContent className="dialog-content" style={{background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'top right 15% no-repeat'}}>
-	            <span>Height : {details.height}</span>
-	            <span>Weight : {details.weight}</span>
-	            <span>Type   : {details.type}</span>
-	            <span>Abilities : {details.ability}</span>
-	          </DialogContent>
-	          <DialogActions fullWidth>
-	            <Button type='button' onClick={this.props.handleCloseDialog}>Close</Button>
-	          </DialogActions>
+	          { attributes ? 
+	          	<div>
+		          <DialogTitle>
+		          	{details.name}
+		          </DialogTitle>
+		          <DialogContent className="dialog-content" style={{background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'top right 15% no-repeat'}}>
+		            <span>Height : {details.height}</span>
+		            <span>Weight : {details.weight}</span>
+		            <span>Type   : {details.type}</span>
+		            <span>Abilities : {details.ability}</span>
+		          </DialogContent>
+		          <DialogActions fullWidth>
+		            <Button type='button' onClick={this.props.handleCloseDialog}>Close</Button>
+		          </DialogActions>
+		        </div>
+
+		          : <Spinner/>
+	          }
 	        </Dialog>
+	    
 		);
 	}
 

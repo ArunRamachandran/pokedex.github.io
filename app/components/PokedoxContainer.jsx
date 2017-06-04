@@ -35,6 +35,7 @@ export default class PokedoxContainer extends Component {
         	isFilter: false,
         	filterIndex: null,
         	openDialogue: false,
+        	selectedIndex: null,
         	pokemonAttributes: null
         }
     }
@@ -121,7 +122,8 @@ export default class PokedoxContainer extends Component {
       */
     showAttributes = (id) => {
     	this.setState({
-    		openDialogue: true
+    		openDialogue: true,
+    		selectedIndex: id
     	})
     	fetchPokemonAttributes(id);
     }
