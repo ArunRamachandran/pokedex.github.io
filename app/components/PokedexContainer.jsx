@@ -22,7 +22,7 @@ const hideContainer = {
 	opacity: '0.5'
 };
 
-export default class PokedoxContainer extends Component {
+export default class PokedexContainer extends Component {
 
 	constructor(props) {
         super(props);
@@ -143,7 +143,12 @@ export default class PokedoxContainer extends Component {
 				<Header data={data} filterData={this.filterData} clearSearchFilter={this.clearSearchFilter}/>\
 				<div style={this.state.openDialogue ? hideContainer : {}}>
 					
-					{ data.length ? <PokemonCards data={currentPageContent} showAttributes={this.showAttributes}/> : <Loader/> }
+					{ data.length ? // Show cards once data is loaded
+                        <PokemonCards 
+                            data={currentPageContent} 
+                            showAttributes={this.showAttributes}/> 
+                        : <Loader/> 
+                    }
 					
 					{ data.length && !isFilter ?  // Hide pagination while displaying the search resutls
 						<Pagination 
@@ -154,21 +159,21 @@ export default class PokedoxContainer extends Component {
 					}
 
 				</div>
-				{ this.state.openDialogue && 
-					<DetailedView
-						selectedIndex={this.state.selectedIndex} 
-						openDialogue={this.state.openDialogue}
-						handleCloseDialog={this.handleCloseDialog}/> 
-				}
-				{ this.state.isSnackbarActive &&
-					<Snackbar
-			          active={this.state.isSnackbarActive}
-			          onClick={this.closeSnackbar}
-			          onTimeout={this.closeSnackbar}
-			          action="Close">
-			          	{this.state.warningMsg}
-			         </Snackbar>
-				}
+    				{ this.state.openDialogue && 
+    					<DetailedView
+    						selectedIndex={this.state.selectedIndex} 
+    						openDialogue={this.state.openDialogue}
+    						handleCloseDialog={this.handleCloseDialog}/> 
+    				}
+    				{ this.state.isSnackbarActive &&
+    					<Snackbar
+    			          active={this.state.isSnackbarActive}
+    			          onClick={this.closeSnackbar}
+    			          onTimeout={this.closeSnackbar}
+    			          action="Close">
+    			          	{this.state.warningMsg}
+    			         </Snackbar>
+    				}
 			</div>
 		);
 	}

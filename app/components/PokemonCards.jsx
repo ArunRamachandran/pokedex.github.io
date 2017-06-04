@@ -37,8 +37,6 @@ export default class PokemonCards extends Component {
 		return id;
 	}
 
-
-
 	createCards = (data) => {
 		let cards = data.map((pokemon, index) => {
 

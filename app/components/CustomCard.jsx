@@ -37,15 +37,14 @@ export default class CustomCard extends Component {
 		const {pokemon, pokemonId} = this.props;
 
 		return (
-				<Card shadow={0} className="pokemon-card-view" style={cardStyle} onClick={() => this.props.showAttributes(pokemonId)}>
-				    <CardTitle expand style={{color: '#fff', background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'bottom right 15% no-repeat #46B6AC'}}>
-				    	{pokemon.name}
-				    </CardTitle>
-				    <CardText>
-				      
-				    </CardText>
-				    
-				</Card>
+			<Card shadow={0} className="pokemon-card-view" style={cardStyle} onClick={() => this.props.showAttributes(pokemonId)}>
+			    <CardTitle expand style={{color: '#fff', background: 'url(' + 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + `${pokemonId}.png` + ')' + 'bottom right 15% no-repeat #46B6AC'}}>
+			    	{pokemon.name}
+			    </CardTitle>
+			    <CardText>
+			   
+			    </CardText>			    
+			</Card>
 		);
 	}
 

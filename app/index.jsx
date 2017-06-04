@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import PokedoxContainer from './components/PokedoxContainer.jsx';
+import PokedexContainer from './components/PokedexContainer.jsx';
 import './stylesheets/pokedex-main.scss';
 
 import 'react-mdl/extra/material.js';
@@ -15,7 +15,7 @@ export default class App extends Component {
 	render (){
 		return (
 			<div>
-				<PokedoxContainer/>
+				<PokedexContainer/>
 			</div>
 		);
 	}

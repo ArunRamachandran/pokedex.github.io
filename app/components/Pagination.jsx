@@ -16,7 +16,7 @@ export default class Pagination extends Component {
 		return (
 			<div className="pokedex-pagination">
 				<span style={{marginRight: '5px'}}>
-					<Tooltip label="Move Back" position="left">
+					<Tooltip label="Previous Page" position="left">
 					    <Chip onClick={this.props.loadPreviousPage}>
 					    	<Icon name="navigate_before" />
 						</Chip>
